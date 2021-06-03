@@ -2,9 +2,9 @@
 
 
 Hangman Terminal game using Python.<br />
-You are basically just guess the word and fill the blanks.  
+You basically just guess the word and fill the blanks.  
 You can either guess a single letter or the word itself.  
-You can have a total of 7 wrong guesses for each word, after which hangman dies.  
+You can have a total of 7 wrong guesses for each word.  
 Your health will reset after each round.  
 Your score will be total number of words you guessed correctly.  
 All the scores will be stored in scoresheet.txt file.    
