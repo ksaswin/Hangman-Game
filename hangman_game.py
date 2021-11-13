@@ -2,8 +2,17 @@ from subprocess import call
 import pickle
 import random
 import time
+import platform
+import os
 import player_details
 
+
+USER = platform.system()
+def clr_screen():
+    if USER == 'Linux':
+        call('clear')
+    elif USER == 'Windows':
+        r = os.system('cls')
 
 hangman = {1:
     ["     ----------",
@@ -87,9 +96,14 @@ print('You can either guess a single letter or the word itself.')
 print("You can have a total of 7 wrong guesses for each word, after which you'll die.")
 print('Your health will reset after each level.')
 print('Your score will be the total number of words you gussed right.')
-player_details.highscorePrint()
+
+if not os.path.isfile('highscores.pickle'):
+    player_details.reset_scores()
+
+player_details.highscorePrint()                 # Print current high scores
 print('\nPLAYER NAME')
-name = player_details.player_info()
+
+name = player_details.player_info()             # Inputs for player info
 print('\t\t\t\t\t\t\tGame will start shortly')
 time.sleep(2)
 
@@ -127,7 +141,7 @@ def gamewordChoice():
 
 while wrong_choice < 7:                         #Game loop
     if win:
-        call('clear')
+        clr_screen()
         win = False
         correct_choice = 0
         life = 7
@@ -139,12 +153,12 @@ while wrong_choice < 7:                         #Game loop
     print('\n')
     user_choice = input("\nEnter your guess here: ").upper()
     
-    if not ('A' <= user_choice <= 'Z'):
+    if not user_choice.isalpha():
         continue
 
     if len(user_choice) > 1:                    #Guessing the whole word
         if user_choice == game_word:
-            call('clear')
+            clr_screen()
             win = True
             print('\t\t\t\t\t\t\tLevel: ', len(chosen_list))
             print("Health: ", "■ "*life)
@@ -155,7 +169,7 @@ while wrong_choice < 7:                         #Game loop
             print('Moving to the next level')
             time.sleep(2)
         else:
-            call('clear')
+            clr_screen()
             wrong_choice += 1
             life = 7 - wrong_choice
             print('\t\t\t\t\t\t\tLevel: ', len(chosen_list))
@@ -169,7 +183,7 @@ while wrong_choice < 7:                         #Game loop
             print("\n")
             
     elif user_choice in game_word:              #Guessing one letter
-        call('clear')
+        clr_screen()
         print('\t\t\t\t\t\t\tLevel: ', len(chosen_list))
         if user_choice in chosen_letter_list:
             print("You've tried that letter before.")
@@ -185,7 +199,7 @@ while wrong_choice < 7:                         #Game loop
         print("\n")
                 
     else:
-        call('clear')
+        clr_screen()
         print('\t\t\t\t\t\t\tLevel: ', len(chosen_list))
         if user_choice in chosen_letter_list:
             print("You've tried that letter before.")
