@@ -95,6 +95,9 @@ def highscorePrint():
 #AFTER THAT COMMENT THOSE TWO LINES AGAIN AND PLAY THE GAME (RUN hangman_game.py)
 #YOU MAY FOLLOW THE SAME PROCEDURES TO RESET THE HIGHSCORES TO DEFAULT VALUE.
 
-#with open('highscores.pickle', 'wb') as handle:                                 #Highscore reset
-#    pickle.dump(highscore_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+def reset_scores():
+    with open('highscores.pickle', 'wb') as handle:                                 #Highscore reset
+        pickle.dump(highscore_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
+if __name__ == '__main__':
+    reset_scores()
